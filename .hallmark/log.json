@@ -1,0 +1,9 @@
+[
+  {
+    "date": "2026-10-12",
+    "macrostructure": "Workbench",
+    "theme": "Cobalt",
+    "enrichment": "live data visualizations",
+    "brief": "Developer workbench for search evidence diff and CI gates"
+  }
+]

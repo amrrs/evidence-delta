@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EvidenceDelta · Search evidence for CI</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <a class="skip" href="#analysis">Skip to comparison</a>
+    <header>
+      <a class="wordmark" href="/"
+        >Evidence<span>Delta</span
+        ><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+          <path d="M3 18L11 3l8 15Z" /></svg
+      ></a>
+      <div class="nav-actions">
+        <button id="commands">Commands <kbd>⌘ K</kbd></button
+        ><a
+          href="https://github.com/amrrs/evidence-delta"
+          target="_blank"
+          rel="noreferrer"
+          >Source ↗</a
+        >
+      </div>
+    </header>
+    <main>
+      <div class="intro">
+        <div>
+          <h1>Version your search evidence.</h1>
+          <p>
+            Separate source churn, snippet changes, and rank movement. Feed the
+            diff into CI.
+          </p>
+        </div>
+        <div class="local">
+          <span class="dot"></span> Local workbench <code>127.0.0.1</code>
+        </div>
+      </div>
+      <div class="workbench">
+        <aside class="controls" aria-label="Observation controls">
+          <form id="capture-form">
+            <h2>Live observation</h2>
+            <label for="query">Search query</label
+            ><textarea
+              id="query"
+              rows="3"
+              maxlength="240"
+              required
+              aria-describedby="query-help"
+            >
+India semiconductor fabrication policy</textarea>
+            <p id="query-help" class="helper">
+              Google + Google News · India · English · top 10 per engine
+            </p>
+            <label class="check"
+              ><input id="force" type="checkbox" />Bypass caches</label
+            ><button id="capture" class="primary" type="submit">
+              Capture live <span>↗</span>
+            </button>
+            <p class="helper">
+              Two SerpApi requests per new capture. Local TTL: 60 seconds.
+            </p>
+          </form>
+          <div class="budget">
+            <span>Daily reserved calls</span><strong id="usage">— / 24</strong
+            ><progress
+              id="budget"
+              max="24"
+              value="0"
+              aria-label="Daily API request budget"
+            ></progress>
+          </div>
+          <section class="replay-control">
+            <h2>Detector verification</h2>
+            <p>
+              Inject labeled changes into a copy of a live snapshot. Zero API
+              calls.
+            </p>
+            <button id="replay">Run controlled replay</button>
+          </section>
+          <section>
+            <div class="section-heading">
+              <h2>Snapshots</h2>
+              <button
+                id="refresh"
+                class="icon-button"
+                aria-label="Refresh snapshots"
+              >
+                ↻
+              </button>
+            </div>
+            <div id="history" class="history">
+              <p>Capture a live observation to create your first baseline.</p>
+            </div>
+          </section>
+          <div class="tools">
+            <button id="verify">Verify ledger</button
+            ><button id="export">Export bundle ↓</button>
+          </div>
+          <div id="ledger" class="helper" role="status"></div>
+        </aside>
+        <section
+          id="analysis"
+          class="analysis"
+          aria-label="Evidence comparison"
+        >
+          <div class="compare-controls">
+            <label
+              >Before<select id="before" aria-label="Before snapshot">
+                <option value="">Choose snapshot</option>
+              </select></label
+            ><label
+              >After<select id="after" aria-label="After snapshot">
+                <option value="">Choose snapshot</option>
+              </select></label
+            ><button id="compare">Compare →</button>
+          </div>
+          <div id="status" class="status" role="status" aria-live="polite">
+            Capture two observations, or run a controlled replay, to inspect a
+            diff.
+          </div>
+          <div id="report">
+            <div class="empty">
+              <svg
+                viewBox="0 0 360 180"
+                role="img"
+                aria-label="Two evidence rankings awaiting comparison"
+              >
+                <path
+                  d="M70 35h55m110 0h55M70 70h55m110 0h55M70 105h55m110 0h55M70 140h55m110 0h55"
+                />
+                <path
+                  class="dashed"
+                  d="M130 35l100 70M130 70l100-35M130 105l100 35M130 140l100-70"
+                />
+              </svg>
+              <h2>A ranking shift isn’t an evidence change.</h2>
+              <p>
+                Compare the same query and locale across time. Canonical URLs
+                establish identity; optional title matching exposes alias
+                hypotheses.
+              </p>
+              <code>evidencedelta capture "your query"</code>
+            </div>
+          </div>
+          <section class="policy">
+            <div>
+              <h2>CI policy</h2>
+              <p>Exit 0: pass · 1: gate failed · 2: invalid operation</p>
+            </div>
+            <div class="policy-fields">
+              <label
+                >Max snippet changes<input
+                  id="max-content"
+                  type="number"
+                  value="0"
+                  min="0"
+                  max="20" /></label
+              ><label
+                >Max removed sources<input
+                  id="max-removed"
+                  type="number"
+                  value="0"
+                  min="0"
+                  max="20" /></label
+              ><label
+                >Minimum RBO<input
+                  id="min-rbo"
+                  type="number"
+                  value="0"
+                  min="0"
+                  max="1"
+                  step="0.05"
+              /></label>
+            </div>
+            <label class="check"
+              ><input id="fuzzy" type="checkbox" checked />Match URL
+              aliases</label
+            >
+            <div id="gate" class="gate-result">
+              Compare snapshots to evaluate the gate.
+            </div>
+            <pre id="cli">evidencedelta compare BEFORE AFTER --gate</pre>
+            <button id="copy" disabled>Copy CLI command</button>
+          </section>
+        </section>
+      </div>
+    </main>
+    <footer>
+      <span>MIT licensed · Deterministic engine · No LLM required</span
+      ><span>Search-returned snippets, not verified article edits.</span>
+    </footer>
+    <dialog id="palette" aria-label="Command palette">
+      <div class="section-heading">
+        <h2>Commands</h2>
+        <button id="close-palette" aria-label="Close command palette">
+          Close
+        </button>
+      </div>
+      <label for="command-search">Find a command</label
+      ><input id="command-search" placeholder="Capture, replay, verify…" />
+      <div id="command-list"></div>
+    </dialog>
+    <script src="/app.js"></script>
+  </body>
+</html>

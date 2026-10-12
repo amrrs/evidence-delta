@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "evidence-delta"
+version = "0.1.0"
+description = "Auditable change-data capture and regression gates for SerpApi search evidence"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "Abdul Majed"}]
+dependencies = []
+
+[project.scripts]
+evidencedelta = "evidence_delta.cli:main"
+
+[tool.setuptools]
+packages = ["evidence_delta"]
+
+[tool.setuptools.package-data]
+evidence_delta = ["web/*"]
