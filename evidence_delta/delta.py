@@ -271,7 +271,13 @@ def compare(before, after, fuzzy=True, persistence=0.9):
         "after_id": after["id"],
         "before_at": before["fetched_at"],
         "after_at": after["fetched_at"],
-        "provenance": {"before": before["mode"], "after": after["mode"]},
+        "watch": before["watch"],
+        "provenance": {
+            "before": before["mode"],
+            "after": after["mode"],
+            "before_trace": before.get("trace", []),
+            "after_trace": after.get("trace", []),
+        },
         "engines": [
             compare_engine(
                 before["payloads"][e], after["payloads"][e], e, fuzzy, persistence

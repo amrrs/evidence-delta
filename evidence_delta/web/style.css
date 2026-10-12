@@ -401,7 +401,7 @@ progress {
   font-size: 12px;
 }
 .rank-svg line {
-  stroke: var(--color-rule);
+  stroke: var(--color-muted);
   stroke-width: 1.5;
 }
 .rank-svg line.changed {

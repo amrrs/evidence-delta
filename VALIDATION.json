@@ -1,0 +1,94 @@
+{
+  "tested_at": "2026-10-12",
+  "tests_passed": 20,
+  "live_observation_pair": [
+    1,
+    2
+  ],
+  "query": "India semiconductor fabrication policy",
+  "captured_at": [
+    "2026-10-12T17:27:20+00:00",
+    "2026-10-12T17:27:55+00:00"
+  ],
+  "engine_results": [
+    {
+      "engine": "google",
+      "source_count": [
+        9,
+        9
+      ],
+      "counts": {
+        "added": 0,
+        "removed": 0,
+        "content": 1,
+        "rank_only": 0,
+        "url_alias": 0,
+        "unchanged": 8
+      },
+      "rbo": {
+        "value": 1.0,
+        "depth": 9,
+        "p": 0.9,
+        "agreements": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unexamined_tail_weight": 0.38742,
+        "reason": "Equal-depth extrapolation at shared depth; unequal-length tails excluded"
+      }
+    },
+    {
+      "engine": "google_news",
+      "source_count": [
+        10,
+        10
+      ],
+      "counts": {
+        "added": 0,
+        "removed": 0,
+        "content": 0,
+        "rank_only": 0,
+        "url_alias": 0,
+        "unchanged": 10
+      },
+      "rbo": {
+        "value": 1.0,
+        "depth": 10,
+        "p": 0.9,
+        "agreements": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unexamined_tail_weight": 0.348678,
+        "reason": "Equal-depth extrapolation at shared depth; unequal-length tails excluded"
+      }
+    }
+  ],
+  "ci_gate": {
+    "passed": false,
+    "failures": [
+      "google: changed evidence exceeds 0"
+    ],
+    "policy": {
+      "max_content": 0,
+      "max_removed": 0,
+      "min_rbo": 0
+    }
+  },
+  "scope": "One live observation pair. Not a general accuracy benchmark; returned snippets can differ without article edits."
+}

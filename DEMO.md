@@ -1,0 +1,1 @@
+Demo beats: real live pair and RBO; before/after snippet; provider provenance; controlled replay with source alignment and alias hypotheses; exact DP inspection; CI failure; ledger verification and offline bundle export. ScreenStudioly captures a real local browser session. Voiceover uses fal.ai ElevenLabs George. Controlled changes are explicitly counterfactual.

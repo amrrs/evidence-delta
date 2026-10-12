@@ -4,6 +4,8 @@
 
 An answer pipeline can fail because its sources disappeared, even when its prompt and model stayed the same. EvidenceDelta versions the evidence returned by SerpApi, separates ranking movement from snippet changes, and produces a deterministic diff that CI can gate on. The local workbench explains each failure; an exported bundle reproduces the comparison offline.
 
+[Watch the narrated local demo (90 seconds)](https://github.com/amrrs/evidence-delta/releases/tag/demo-v1).
+
 Built for the SerpApi India Hackathon 2026 **Open-Source Integrations** track. MIT licensed, Python 3.9+, zero runtime dependencies. No LLM or embedding API is needed.
 
 ## Run locally
@@ -87,6 +89,8 @@ Replay copies a complete live snapshot into a **separate controlled-replay watch
 ```sh
 python3 -m unittest discover -s tests -v
 ```
+
+20 tests pass locally and in GitHub CI on Python 3.9 and 3.12. [Recorded validation summary](VALIDATION.json) documents a real live pair: ranking overlap stayed 1.000 while one Google snippet changed.
 
 Tests cover adversarial matching that beats greedy, comparison with an independent brute-force optimum, URL semantics, top-weighted RBO, content/rank separation, strict identities, recursive credential redaction, local TTL reuse, partial failures, concurrent budget reservations, controlled-replay isolation, snapshot and malformed-ledger tampering, full exports beyond 100 snapshots, and CLI gate exit codes. Development tests establish implementation behavior, not general identity accuracy or production readiness.
 
